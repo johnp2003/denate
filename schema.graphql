@@ -1,0 +1,28 @@
+type CampaignCreated @entity(immutable: true) {
+  id: Bytes!
+  campaignAddress: Bytes! # address
+  charityAddress: Bytes! # address
+  name: String! # string
+  goal: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type CharityVerified @entity(immutable: true) {
+  id: Bytes!
+  charityAddress: Bytes! # address
+  name: String! # string
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type OwnershipTransferred @entity(immutable: true) {
+  id: Bytes!
+  previousOwner: Bytes! # address
+  newOwner: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
