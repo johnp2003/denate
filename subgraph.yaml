@@ -1,3 +1,58 @@
+# specVersion: 1.2.0
+# indexerHints:
+#   prune: auto
+# schema:
+#   file: ./schema.graphql
+# dataSources:
+#   - kind: ethereum
+#     name: CharityCentral
+#     network: scroll-sepolia
+#     source:
+#       address: "0x44f6Dc82C476E9e00263aaFfCB57be4bb95F97e0"
+#       abi: CharityCentral
+#       startBlock: 8576806
+#     mapping:
+#       kind: ethereum/events
+#       apiVersion: 0.0.9
+#       language: wasm/assemblyscript
+#       entities:
+#         - CampaignCreated
+#         - CharityVerified
+#         - OwnershipTransferred
+#       abis:
+#         - name: CharityCentral
+#           file: ./abis/CharityCentral.json
+#         - name: CharityCampaign
+#           file: ./abis/CharityCampaign.json
+#       eventHandlers:
+#         - event: CampaignCreated(indexed address,indexed address,string,uint256)
+#           handler: handleCampaignCreated
+#         - event: CharityVerified(indexed address,string)
+#           handler: handleCharityVerified
+#         - event: OwnershipTransferred(indexed address,indexed address)
+#           handler: handleOwnershipTransferred
+#       file: ./src/charity-central.ts
+# templates:
+#   - kind: ethereum/contract
+#     name: CharityCampaign
+#     network: scroll-sepolia
+#     source:
+#       abi: CharityCampaign
+#     mapping:
+#       kind: ethereum/events
+#       apiVersion: 0.0.9
+#       language: wasm/assemblyscript
+#       entities:
+#         - DonationReceived
+#       abis:
+#         - name: CharityCampaign
+#           file: ./abis/CharityCampaign.json
+#       eventHandlers:
+#         - event: DonationReceived(indexed address,uint256,uint256)
+#           handler: handleDonationReceived
+#       file: ./src/charity-central.ts
+
+
 specVersion: 1.2.0
 indexerHints:
   prune: auto
@@ -16,17 +71,48 @@ dataSources:
       apiVersion: 0.0.9
       language: wasm/assemblyscript
       entities:
-        - CampaignCreated
-        - CharityVerified
-        - OwnershipTransferred
+        - Charity
+        - Campaign
       abis:
         - name: CharityCentral
           file: ./abis/CharityCentral.json
       eventHandlers:
-        - event: CampaignCreated(indexed address,indexed address,string,uint256)
-          handler: handleCampaignCreated
         - event: CharityVerified(indexed address,string)
           handler: handleCharityVerified
-        - event: OwnershipTransferred(indexed address,indexed address)
-          handler: handleOwnershipTransferred
+        - event: CampaignCreated(indexed address,indexed address,string,uint256)
+          handler: handleCampaignCreated
       file: ./src/charity-central.ts
+templates:
+  - kind: ethereum/contract
+    name: CharityCampaign
+    network: scroll-sepolia
+    source:
+      abi: CharityCampaign
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      entities:
+        - Campaign
+        - Milestone
+        - Donor
+        - CampaignDonor
+        - Donation
+      abis:
+        - name: CharityCampaign
+          file: ./abis/CharityCampaign.json
+      eventHandlers:
+        - event: DonationReceived(indexed address,uint256,uint256)
+          handler: handleDonationReceived
+        - event: MilestoneReached(uint256,uint256)
+          handler: handleMilestoneReached
+        - event: FundsReleased(uint256,uint256)
+          handler: handleFundsReleased
+        - event: CampaignDeactivated()
+          handler: handleCampaignDeactivated
+        - event: CampaignCompleted()
+          handler: handleCampaignCompleted
+        - event: TopDonorsAwarded()
+          handler: handleTopDonorsAwarded
+      file: ./src/charity-campaign.ts
+

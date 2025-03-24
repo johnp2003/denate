@@ -1,28 +1,112 @@
-type CampaignCreated @entity(immutable: true) {
-  id: Bytes!
-  campaignAddress: Bytes! # address
-  charityAddress: Bytes! # address
-  name: String! # string
-  goal: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
+# type CampaignCreated @entity(immutable: true) {
+#   id: Bytes!
+#   campaignAddress: Bytes! # address
+#   charityAddress: Bytes! # address
+#   name: String! # string
+#   goal: BigInt! # uint256
+#   blockNumber: BigInt!
+#   blockTimestamp: BigInt!
+#   transactionHash: Bytes!
+# }
+
+# type CharityVerified @entity(immutable: true) {
+#   id: Bytes!
+#   charityAddress: Bytes! # address
+#   name: String! # string
+#   blockNumber: BigInt!
+#   blockTimestamp: BigInt!
+#   transactionHash: Bytes!
+# }
+
+# type OwnershipTransferred @entity(immutable: true) {
+#   id: Bytes!
+#   previousOwner: Bytes! # address
+#   newOwner: Bytes! # address
+#   blockNumber: BigInt!
+#   blockTimestamp: BigInt!
+#   transactionHash: Bytes!
+# }
+
+# type Donor @entity {
+#   id: ID! # Donor address
+#   totalDonated: BigInt!
+#   donations: [Donation!]! @derivedFrom(field: "donor")
+#   campaignsSupported: Int!
+# }
+
+# type Campaign @entity {
+#   id: ID! # Campaign address
+#   name: String!
+#   charity: Bytes!
+#   totalDonated: BigInt!
+#   donations: [Donation!]! @derivedFrom(field: "campaign")
+#   createdAt: BigInt!
+# }
+
+# type Donation @entity {
+#   id: ID! # Transaction hash
+#   amount: BigInt!
+#   donor: Donor!
+#   campaign: Campaign!
+#   timestamp: BigInt!
+# }
+
+
+type Charity @entity {
+  id: ID!
+  address: Bytes!
+  name: String!
+  isVerified: Boolean!
+  campaigns: [Campaign!]! @derivedFrom(field: "charity")
 }
 
-type CharityVerified @entity(immutable: true) {
-  id: Bytes!
-  charityAddress: Bytes! # address
-  name: String! # string
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
+type Campaign @entity {
+  id: ID!
+  address: Bytes!
+  charity: Charity!
+  name: String!
+  description: String!
+  goal: BigInt!
+  totalDonated: BigInt!
+  state: String!
+  milestones: [Milestone!]! @derivedFrom(field: "campaign")
+  donations: [Donation!]! @derivedFrom(field: "campaign")
+  donors: [CampaignDonor!]! @derivedFrom(field: "campaign")
+  topDonors: [CampaignDonor!]
+  createdAt: BigInt!
 }
 
-type OwnershipTransferred @entity(immutable: true) {
-  id: Bytes!
-  previousOwner: Bytes! # address
-  newOwner: Bytes! # address
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
+type Milestone @entity {
+  id: ID!
+  campaign: Campaign!
+  index: Int!
+  target: BigInt!
+  reached: Boolean!
+  fundsReleased: Boolean!
+  reachedAt: BigInt
+}
+
+type Donor @entity {
+  id: ID!
+  address: Bytes!
+  totalDonated: BigInt!
+  campaignsDonatedTo: [CampaignDonor!]! @derivedFrom(field: "donor")
+  donations: [Donation!]! @derivedFrom(field: "donor")
+}
+
+type CampaignDonor @entity {
+  id: ID!
+  campaign: Campaign!
+  donor: Donor!
+  totalDonated: BigInt!
+  isTopDonor: Boolean!
+  rank: Int
+}
+
+type Donation @entity {
+  id: ID!
+  donor: Donor!
+  campaign: Campaign!
+  amount: BigInt!
+  timestamp: BigInt!
 }
