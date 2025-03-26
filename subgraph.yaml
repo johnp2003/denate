@@ -63,7 +63,7 @@ dataSources:
     name: CharityCentral
     network: scroll-sepolia
     source:
-      address: "0x44f6Dc82C476E9e00263aaFfCB57be4bb95F97e0"
+      address: "0xeF4A0ac89e9079731567B3902277d88bb0742c00"
       abi: CharityCentral
       startBlock: 8576806
     mapping:
