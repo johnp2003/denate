@@ -18,6 +18,11 @@
         "internalType": "address",
         "name": "_centralContractAddress",
         "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "_campaignImageURI",
+        "type": "string"
       }
     ],
     "stateMutability": "nonpayable",
@@ -33,6 +38,31 @@
     "anonymous": false,
     "inputs": [],
     "name": "CampaignDeactivated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "newName",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "newDescription",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "newImageURI",
+        "type": "string"
+      }
+    ],
+    "name": "CampaignDetailsUpdated",
     "type": "event"
   },
   {
@@ -103,6 +133,13 @@
     "inputs": [],
     "name": "TopDonorsAwarded",
     "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "campaignImageURI",
+    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
     "inputs": [],
@@ -188,6 +225,11 @@
     "outputs": [
       { "internalType": "string", "name": "_name", "type": "string" },
       { "internalType": "string", "name": "_description", "type": "string" },
+      {
+        "internalType": "string",
+        "name": "_campaignImageURI",
+        "type": "string"
+      },
       { "internalType": "uint256", "name": "_goal", "type": "uint256" },
       { "internalType": "uint256", "name": "_totalDonated", "type": "uint256" },
       {
@@ -323,6 +365,17 @@
     "name": "totalDonated",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "string", "name": "_newName", "type": "string" },
+      { "internalType": "string", "name": "_newDescription", "type": "string" },
+      { "internalType": "string", "name": "_newImageURI", "type": "string" }
+    ],
+    "name": "updateCampaignDetails",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   { "stateMutability": "payable", "type": "receive" }

@@ -63,7 +63,7 @@ dataSources:
     name: CharityCentral
     network: scroll-sepolia
     source:
-      address: "0xeF4A0ac89e9079731567B3902277d88bb0742c00"
+      address: "0x9D77E4ECeA7763cB826BF90E2226cB666bc04B66"
       abi: CharityCentral
       startBlock: 8576806
     mapping:
@@ -79,7 +79,7 @@ dataSources:
       eventHandlers:
         - event: CharityVerified(indexed address,string)
           handler: handleCharityVerified
-        - event: CampaignCreated(indexed address,indexed address,string,uint256)
+        - event: CampaignCreated(indexed address,indexed address,string,uint256,string)
           handler: handleCampaignCreated
       file: ./src/charity-central.ts
 templates:

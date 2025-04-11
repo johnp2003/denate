@@ -1,234 +1,245 @@
 [
   {
-    "type": "constructor",
     "inputs": [
-      { "name": "initialOwner", "type": "address", "internalType": "address" }
+      { "internalType": "address", "name": "initialOwner", "type": "address" }
     ],
-    "stateMutability": "nonpayable"
+    "stateMutability": "nonpayable",
+    "type": "constructor"
   },
   {
+    "inputs": [
+      { "internalType": "address", "name": "owner", "type": "address" }
+    ],
     "name": "OwnableInvalidOwner",
-    "type": "error",
-    "inputs": [
-      { "name": "owner", "type": "address", "internalType": "address" }
-    ]
+    "type": "error"
   },
   {
+    "inputs": [
+      { "internalType": "address", "name": "account", "type": "address" }
+    ],
     "name": "OwnableUnauthorizedAccount",
-    "type": "error",
-    "inputs": [
-      { "name": "account", "type": "address", "internalType": "address" }
-    ]
+    "type": "error"
   },
   {
-    "name": "CampaignCreated",
-    "type": "event",
+    "anonymous": false,
     "inputs": [
       {
+        "indexed": true,
+        "internalType": "address",
         "name": "campaignAddress",
-        "type": "address",
-        "indexed": true,
-        "internalType": "address"
+        "type": "address"
       },
       {
+        "indexed": true,
+        "internalType": "address",
         "name": "charityAddress",
-        "type": "address",
-        "indexed": true,
-        "internalType": "address"
+        "type": "address"
       },
       {
-        "name": "name",
-        "type": "string",
         "indexed": false,
-        "internalType": "string"
+        "internalType": "string",
+        "name": "name",
+        "type": "string"
       },
       {
+        "indexed": false,
+        "internalType": "uint256",
         "name": "goal",
-        "type": "uint256",
+        "type": "uint256"
+      },
+      {
         "indexed": false,
-        "internalType": "uint256"
+        "internalType": "string",
+        "name": "campaignImageURI",
+        "type": "string"
       }
     ],
-    "anonymous": false
+    "name": "CampaignCreated",
+    "type": "event"
   },
   {
-    "name": "CharityVerified",
-    "type": "event",
+    "anonymous": false,
     "inputs": [
       {
+        "indexed": true,
+        "internalType": "address",
         "name": "charityAddress",
-        "type": "address",
-        "indexed": true,
-        "internalType": "address"
+        "type": "address"
       },
       {
-        "name": "name",
-        "type": "string",
         "indexed": false,
-        "internalType": "string"
+        "internalType": "string",
+        "name": "name",
+        "type": "string"
       }
     ],
-    "anonymous": false
+    "name": "CharityVerified",
+    "type": "event"
   },
   {
-    "name": "OwnershipTransferred",
-    "type": "event",
+    "anonymous": false,
     "inputs": [
       {
+        "indexed": true,
+        "internalType": "address",
         "name": "previousOwner",
-        "type": "address",
-        "indexed": true,
-        "internalType": "address"
+        "type": "address"
       },
       {
+        "indexed": true,
+        "internalType": "address",
         "name": "newOwner",
-        "type": "address",
-        "indexed": true,
-        "internalType": "address"
+        "type": "address"
       }
     ],
-    "anonymous": false
+    "name": "OwnershipTransferred",
+    "type": "event"
   },
   {
+    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "name": "allCampaigns",
-    "type": "function",
-    "inputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
-    "outputs": [{ "name": "", "type": "address", "internalType": "address" }],
-    "stateMutability": "view"
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
+    "inputs": [
+      { "internalType": "address", "name": "", "type": "address" },
+      { "internalType": "uint256", "name": "", "type": "uint256" }
+    ],
     "name": "charityCampaigns",
-    "type": "function",
-    "inputs": [
-      { "name": "", "type": "address", "internalType": "address" },
-      { "name": "", "type": "uint256", "internalType": "uint256" }
-    ],
-    "outputs": [{ "name": "", "type": "address", "internalType": "address" }],
-    "stateMutability": "view"
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
+    "inputs": [
+      { "internalType": "string", "name": "_name", "type": "string" },
+      { "internalType": "string", "name": "_description", "type": "string" },
+      { "internalType": "uint256", "name": "_goal", "type": "uint256" },
+      {
+        "internalType": "string",
+        "name": "_campaignImageURI",
+        "type": "string"
+      }
+    ],
     "name": "createCampaign",
-    "type": "function",
-    "inputs": [
-      { "name": "_name", "type": "string", "internalType": "string" },
-      { "name": "_description", "type": "string", "internalType": "string" },
-      { "name": "_goal", "type": "uint256", "internalType": "uint256" }
-    ],
-    "outputs": [{ "name": "", "type": "address", "internalType": "address" }],
-    "stateMutability": "nonpayable"
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
+    "inputs": [],
     "name": "getAllCampaigns",
-    "type": "function",
-    "inputs": [],
     "outputs": [
-      { "name": "", "type": "address[]", "internalType": "address[]" }
+      { "internalType": "address[]", "name": "", "type": "address[]" }
     ],
-    "stateMutability": "view"
+    "stateMutability": "view",
+    "type": "function"
   },
   {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_charityAddress",
+        "type": "address"
+      }
+    ],
     "name": "getCharityCampaigns",
-    "type": "function",
-    "inputs": [
-      {
-        "name": "_charityAddress",
-        "type": "address",
-        "internalType": "address"
-      }
-    ],
     "outputs": [
-      { "name": "", "type": "address[]", "internalType": "address[]" }
+      { "internalType": "address[]", "name": "", "type": "address[]" }
     ],
-    "stateMutability": "view"
+    "stateMutability": "view",
+    "type": "function"
   },
   {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_charityAddress",
+        "type": "address"
+      }
+    ],
     "name": "isCharityVerified",
-    "type": "function",
-    "inputs": [
-      {
-        "name": "_charityAddress",
-        "type": "address",
-        "internalType": "address"
-      }
-    ],
-    "outputs": [{ "name": "", "type": "bool", "internalType": "bool" }],
-    "stateMutability": "view"
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
+    "inputs": [],
     "name": "nftContractAddress",
-    "type": "function",
-    "inputs": [],
-    "outputs": [{ "name": "", "type": "address", "internalType": "address" }],
-    "stateMutability": "view"
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
+    "inputs": [],
     "name": "owner",
-    "type": "function",
-    "inputs": [],
-    "outputs": [{ "name": "", "type": "address", "internalType": "address" }],
-    "stateMutability": "view"
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
+    "inputs": [],
     "name": "renounceOwnership",
-    "type": "function",
-    "inputs": [],
     "outputs": [],
-    "stateMutability": "nonpayable"
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    "name": "setNFTContractAddress",
-    "type": "function",
     "inputs": [
       {
+        "internalType": "address",
         "name": "_nftContractAddress",
-        "type": "address",
-        "internalType": "address"
+        "type": "address"
       }
     ],
+    "name": "setNFTContractAddress",
     "outputs": [],
-    "stateMutability": "nonpayable"
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
+    "inputs": [
+      { "internalType": "address", "name": "newOwner", "type": "address" }
+    ],
     "name": "transferOwnership",
-    "type": "function",
-    "inputs": [
-      { "name": "newOwner", "type": "address", "internalType": "address" }
-    ],
     "outputs": [],
-    "stateMutability": "nonpayable"
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    "name": "unverifyCharity",
-    "type": "function",
     "inputs": [
       {
+        "internalType": "address",
         "name": "_charityAddress",
-        "type": "address",
-        "internalType": "address"
+        "type": "address"
       }
     ],
+    "name": "unverifyCharity",
     "outputs": [],
-    "stateMutability": "nonpayable"
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
+    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "name": "verifiedCharities",
-    "type": "function",
-    "inputs": [{ "name": "", "type": "address", "internalType": "address" }],
-    "outputs": [{ "name": "", "type": "bool", "internalType": "bool" }],
-    "stateMutability": "view"
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    "name": "verifyCharity",
-    "type": "function",
     "inputs": [
       {
+        "internalType": "address",
         "name": "_charityAddress",
-        "type": "address",
-        "internalType": "address"
+        "type": "address"
       },
-      { "name": "_charityName", "type": "string", "internalType": "string" }
+      { "internalType": "string", "name": "_charityName", "type": "string" }
     ],
+    "name": "verifyCharity",
     "outputs": [],
-    "stateMutability": "nonpayable"
+    "stateMutability": "nonpayable",
+    "type": "function"
   }
 ]
